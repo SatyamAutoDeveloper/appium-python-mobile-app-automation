@@ -83,50 +83,30 @@ class MobileActions:
             by, loc = locator
             loc = loc.replace("{value}", value)
             new_locator = (by, loc)
-            self.click(new_locator)
+            self.click_on_element(new_locator)
         else:
             raise ValueError("Locator must be a tuple of (By, locator_string)")
-        
-    def double_click(self, locator):
-        """Performs a double click on an element."""
-        element = self.find_element(locator)
-        actions = ActionChains(self.driver)
-        actions.double_click(element).perform()
-        logger.info(f"Performed double click on element with locator: {locator}")
-
-    def long_press(self, locator, duration=2000):
-        """Performs a long press on an element."""
-        element = self.find_element(locator)
-        actions = ActionChains(self.driver)
-        actions.click_and_hold(element).pause(duration / 1000).release().perform()
-        logger.info(f"Performed long press on element with locator: {locator} for duration: {duration}ms")
 
     def get_element_text(self, locator):
         """Gets the text of an element."""
-        element = self.find_element(*locator)
+        element = self.find_element(locator)
         return element.text
+    
+    def get_elements_texts(self, locator):
+        """Gets the texts of multiple elements."""
+        elements = self.find_elements(locator)
+        return [element.text for element in elements]
+    
+    def get_elements_count(self, locator):
+        """Gets the count of elements matching the locator."""
+        elements = self.find_elements(locator)
+        return len(elements)
 
     def is_element_displayed(self, locator):
         """Checks if an element is displayed."""
         try:
             element = self.find_element(locator)
             return element.is_displayed()
-        except Exception:
-            return False
-
-    def is_element_enabled(self, locator):
-        """Checks if an element is enabled."""
-        try:
-            element = self.find_element(*locator)
-            return element.is_enabled()
-        except Exception:
-            return False
-
-    def is_element_selected(self, locator):
-        """Checks if an element is selected."""
-        try:
-            element = self.find_element(*locator)
-            return element.is_selected()
         except Exception:
             return False
 
@@ -164,17 +144,5 @@ class MobileActions:
     def scroll_element_into_view(self, locator):
         """Scrolls until the element is in view using mobile UIAutomator (Android focus)."""
         # Note: For iOS, you'd typically use 'mobile: scroll' script
-        element = self.find_element(*locator)
+        element = self.find_element(locator)
         self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
-
-    def mouse_over_element(self, locator):
-        """Hovers over an element (Useful for hybrid apps/web views)."""
-        element = self.find_element(*locator)
-        actions = ActionChains(self.driver)
-        actions.move_to_element(element).perform()
-
-    def move_to_element_and_click(self, locator):
-        """Chains a move and click action."""
-        element = self.find_element(*locator)
-        actions = ActionChains(self.driver)
-        actions.move_to_element(element).click().perform()
