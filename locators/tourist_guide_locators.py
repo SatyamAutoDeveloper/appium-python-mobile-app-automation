@@ -1,7 +1,6 @@
 from appium.webdriver.common.appiumby import AppiumBy
 
 enter_city_search_box = (AppiumBy.ID, "com.dataflair.myapplication:id/editSearchbox")
-#valid_city_name = (AppiumBy.XPATH, '//*[@text="vijayawada"]')
 valid_city_name = (AppiumBy.ID, "com.dataflair.myapplication:id/txtCityname")
 no_city_present = (AppiumBy.ID, "com.dataflair.myapplication:id/recyclerview")
 hotel_rooms = (AppiumBy.ID, "com.dataflair.myapplication:id/btnHotelrooms")
@@ -9,8 +8,7 @@ hotel_rooms_list = (AppiumBy.CLASS_NAME, "androidx.cardview.widget.CardView")
 restaurants = (AppiumBy.ID, "com.dataflair.myapplication:id/btnRestaurant")
 restaurants_list = (AppiumBy.CLASS_NAME, "androidx.cardview.widget.CardView")
 famous_places = (AppiumBy.ID, "com.dataflair.myapplication:id/btnFamousplaces")
-famous_place_name = (AppiumBy.XPATH, '//*[@text="Kondapalli Fort"]')
 bus_station = (AppiumBy.ID, "com.dataflair.myapplication:id/btnBusstation")
-bus_station_name = (AppiumBy.XPATH, '//*[@text="Pandit Nehru Bus Station"]')
 history = (AppiumBy.ID, "com.dataflair.myapplication:id/btnHistory")
-selected_city_history = (AppiumBy.XPATH, '//*[@text="Vijayawada"]')
+name_elem = (AppiumBy.ID, "com.dataflair.myapplication:id/titleTxtView")
+addresses_or_info_elem = (AppiumBy.ID, "com.dataflair.myapplication:id/dataTxtView")
