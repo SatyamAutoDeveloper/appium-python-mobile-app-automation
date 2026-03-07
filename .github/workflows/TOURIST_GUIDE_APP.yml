@@ -50,14 +50,16 @@ jobs:
         arch: x86_64
         target: google_apis
         force-avd-creation: false
-        enable-hw-acceleration: true
+        disable-linux-hw-accel: false
         emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
         disable-animations: true
         script: |
           # Start Appium in the background inside the emulator lifecycle
           appium & 
           # Wait for Appium to start and be ready to accept connections
-          sleep 15 
+          sleep 20
+          # Verify emulator is ready
+          adb wait-for-device
           # Run your pytest suite
           pytest tests/test_tourist_guide_app.py -v --tb=short
     
