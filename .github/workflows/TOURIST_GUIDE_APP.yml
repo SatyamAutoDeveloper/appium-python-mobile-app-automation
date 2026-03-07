@@ -1,0 +1,67 @@
+name: Tourist Guide App Testing
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Start Android Emulator
+      uses: ReactiveCircus/android-emulator-runner@v2
+      with:
+        api-level: 30
+        profile: Nexus 5X
+        script: echo "Emulator started"
+    
+    - name: Verify APK exists
+      run: |
+        if [ ! -f ./apps/tourist_guide_app.apk ]; then
+          echo "APK file not found in ./apps folder"
+          exit 1
+        fi
+    
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24.13.0'
+    
+    - name: Start Appium Server
+      run: |
+        npm install -g appium
+        appium &
+    
+    - name: Wait for Appium
+      run: sleep 5
+    
+    - name: Run tests
+      run: pytest tests/test_tourist_guide_app.py -v --tb=short
+    
+    - name: Create artifacts archive
+      if: always()
+      run: |
+        zip -r test-artifacts.zip reports/ logs/ screenshots/ || true
+
+    - name: Upload artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-artifacts
+        path: test-artifacts.zip
+        retention-days: 7
