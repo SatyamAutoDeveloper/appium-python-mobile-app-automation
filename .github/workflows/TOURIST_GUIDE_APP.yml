@@ -43,6 +43,11 @@ jobs:
           exit 1
         fi
 
+    - name: Enable KVM permissions
+      run: |
+        # Ensure the emulator can access /dev/kvm on the runner
+        sudo chmod a+rw /dev/kvm
+
     - name: Run Appium Tests in Emulator
       uses: ReactiveCircus/android-emulator-runner@v2
       with:
