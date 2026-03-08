@@ -50,29 +50,33 @@ jobs:
 
     - name: Run Appium Tests in Emulator
       uses: ReactiveCircus/android-emulator-runner@v2
+      continue-on-error: true
       with:
         api-level: 30
         arch: x86_64
         target: google_apis
         force-avd-creation: false
         disable-linux-hw-accel: false
-        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+        emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot-save -no-audio -no-boot-anim
         disable-animations: true
         script: |
-          # Start Appium in the background inside the emulator lifecycle
-          appium & 
-          APPIUM_PID=$!
-          # Wait for Appium to start and be ready to accept connections
-          sleep 20
-          # Verify emulator is ready
+          # Start Appium and redirect output to a file so it doesn't hang the pipe
+          nohup appium > appium.log 2>&1 & 
+          
+          # Wait for Appium (checking port 4723 is better than just sleep)
+          timeout 60s bash -c 'until nc -z localhost 4723; do sleep 2; done' || true
+          
           adb wait-for-device
-          # Run your pytest suite
+          
+          # Run tests and capture result
           pytest tests/test_tourist_guide_app.py -v --tb=short
           TEST_RESULT=$?
-          # Terminate Appium
-          kill $APPIUM_PID || true
+          
+          # Force kill all appium/node processes
+          pkill -9 -f appium || true
+          pkill -9 -f node || true
+          
           exit $TEST_RESULT
-      continue-on-error: true
 
     - name: Post-test Cleanup
       if: always() # Ensures this runs even if tests fail
