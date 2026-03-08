@@ -72,7 +72,7 @@ jobs:
           # Terminate Appium
           kill $APPIUM_PID || true
           exit $TEST_RESULT
-        continue-on-error: true
+      continue-on-error: true
 
     - name: Post-test Cleanup
       if: always() # Ensures this runs even if tests fail
