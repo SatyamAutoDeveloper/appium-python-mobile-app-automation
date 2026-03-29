@@ -9,15 +9,49 @@ from helpers.native_app_operations import MobileActions
 
 sys.dont_write_bytecode = True
 
+# 1. Configuration for Multiple Apps
+APP_CONFIGS = {
+    "tourist_app": {
+        "app": "apps/tourist_guide_app.apk",
+        "package": "com.dataflair.myapplication",
+        "activity": ".MainActivity"
+    },
+    "fastshopping_app": {
+        "app": "apps/fastshopping.apk",
+        "package": "me.wolszon.fastshopping",
+        "activity": ".MainActivity"
+    }
+}
+
+
+def pytest_addoption(parser):
+    """Add a command line option to select the app."""
+    parser.addoption("--app_name", action="store", default="tourist_app", help="Key for the app configuration defined in APP_CONFIGS")
+
+
 @pytest.fixture(scope="function")
-def driver():
+def driver(request):
+    # Get the app key from CLI or use default
+    app_key = request.config.getoption("--app_name")
+    config = APP_CONFIGS.get(app_key)
+
+    if not config:
+        pytest.exit(f"App configuration for '{app_key}' not found in APP_CONFIGS.")
+
     options = UiAutomator2Options()
     options.platform_name = "Android"
     options.device_name = "Android_Emulator"
-    options.app = "apps/tourist_guide_app.apk"
     options.automation_name = "UiAutomator2"
-    options.package = "com.dataflair.myapplication"
-    options.activity = ".MainActivity"
+
+    # Dynamic capabilities based on selected app
+    options.app = str(pathlib.Path(config["app"]).absolute())
+    options.app_package = config["package"]
+    options.app_activity = config["activity"]
+    
+    #options.app = "apps/tourist_guide_app.apk"
+    #options.package = "com.dataflair.myapplication"
+    #options.activity = ".MainActivity"
+
     options.set_capability("appium:disableWindowAnimation", True)
     options.set_capability("appium:adbExecTimeout", 60000)
 

@@ -1,0 +1,38 @@
+from appium.webdriver.common.appiumby import AppiumBy
+
+app_name_with_logo = (AppiumBy.XPATH, '//*[@content-desc="Fast Shopping"]')
+no_list_selected_list_elem = (AppiumBy.XPATH, '//*[@content-desc="No list selected"]')
+shoppings_list_page_title = (AppiumBy.XPATH, '//*[@content-desc="Shopping lists"]')
+current_tab_no_current_list_msg = (AppiumBy.XPATH, '//*[@content-desc="There are no current lists, create one!"]')
+current_tab_new_list_btn = (AppiumBy.XPATH, '//*[@content-desc="NEW LIST"]')
+new_list_popup_title = (AppiumBy.XPATH, '//*[@content-desc="Add new shopping list"]')
+new_list_popup_cancel_btn = (AppiumBy.XPATH, '//*[@content-desc="CANCEL"]')
+new_list_popup_add_btn = (AppiumBy.XPATH, '//*[@content-desc="ADD"]')
+new_list_popup_input_field = (AppiumBy.CLASS_NAME, 'android.widget.EditText') #Write shopping list name here...
+current_tab_add_item_btn = (AppiumBy.CLASS_NAME, 'android.widget.Button')
+add_item_popup_title = (AppiumBy.XPATH, '//*[@content-desc="Add item"]')
+add_item_popup_cancel_btn = (AppiumBy.XPATH, '//*[@content-desc="CANCEL"]')
+add_item_popup_add_btn = (AppiumBy.XPATH, '//*[@content-desc="ADD"]')
+add_item_popup_input_field = (AppiumBy.CLASS_NAME, 'android.widget.EditText') #Write item name here...
+current_tab_list_show_menu_btn = (AppiumBy.XPATH, '//*[@content-desc="Show menu"]')
+current_tab_rename_list_btn = (AppiumBy.XPATH, '//*[@content-desc="Rename"]')
+rename_shopping_list_popup_title = (AppiumBy.XPATH, '//*[@content-desc="Rename shopping list"]')
+rename_shopping_list_popup_cancel_btn = (AppiumBy.XPATH, '//*[@content-desc="CANCEL"]')
+rename_shopping_list_popup_rename_btn = (AppiumBy.XPATH, '//*[@content-desc="RENAME"]')
+rename_shopping_list_popup_input_field = (AppiumBy.CLASS_NAME, 'android.widget.EditText') #Groceries, Write new shopping list name here...
+current_tab_archive_list_btn = (AppiumBy.XPATH, '//*[@content-desc="Archive"]')
+current_tab = (AppiumBy.XPATH, '//*[@content-desc="CurrentTab 1 of 2"]')
+archived_tab = (AppiumBy.XPATH, '//*[@content-desc="ArchivedTab 2 of 2"]')
+archived_tab_no_archived_list_msg = (AppiumBy.XPATH, '//*[@content-desc="There are no archived lists."]')
+archive_tab_unarchive_btn = (AppiumBy.XPATH, '//*[@content-desc="Unarchive"]')
+archive_tab_delete_btn = (AppiumBy.XPATH, '//*[@content-desc="Delete"]')
+delete_list_confirmation_popup_title = (AppiumBy.XPATH, '//*[@content-desc="Deleting shopping list"]')
+delete_list_confirmation_popup_msg = (AppiumBy.XPATH, '//*[@content-desc="Do you really want to delete Groceries shopping list? This operation cannot be undone."]')
+delete_list_confirmation_popup_cancel_btn = (AppiumBy.XPATH, '//*[@content-desc="CANCEL"]')
+delete_list_confirmation_popup_delete_btn = (AppiumBy.XPATH, '//*[@content-desc="DELETE"]')
+
+show_menu_btn = (AppiumBy.XPATH, '//*[@content-desc="Show menu"]')
+archive_list_btn = (AppiumBy.XPATH, '//*[@content-desc="Archive list"]')
+settings_btn = (AppiumBy.XPATH, '//*[@content-desc="Settings"]')
+multiple_shopping_lists_radio_btn = (AppiumBy.XPATH, '//*[@content-desc="Multiple shopping listsMore features, better management."]')
+navigate_back_btn = (AppiumBy.XPATH, '//*[@content-desc="Back"]')

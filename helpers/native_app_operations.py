@@ -146,3 +146,36 @@ class MobileActions:
         # Note: For iOS, you'd typically use 'mobile: scroll' script
         element = self.find_element(locator)
         self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+
+    def is_element_clickable(self, locator):
+        """Checks if an element is clickable."""
+        try:
+            self.wait_for_element_clickable(locator)
+            return True
+        except Exception:
+            return False
+        
+    def is_element_disabled(self, locator):
+        """Checks if an element is disabled."""
+        try:
+            element = self.find_element(locator)
+            return not element.is_enabled()
+        except Exception:
+            return False
+        
+    def is_element_selected(self, locator):
+        """Checks if an element is selected"""
+        try:
+            element = self.find_element(locator)
+            return element.is_selected()
+        except Exception:
+            return False
+
+    def is_element_checked(self, locator):
+        """Checks if a checkbox or radio button is checked."""
+        try:
+            element = self.find_element(locator)
+            return element.get_attribute("checked") == "true"
+        except Exception:
+            return False
+
