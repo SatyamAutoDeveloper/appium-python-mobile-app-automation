@@ -150,8 +150,8 @@ class MobileActions:
     def is_element_clickable(self, locator):
         """Checks if an element is clickable."""
         try:
-            self.wait_for_element_clickable(locator)
-            return True
+            element = self.find_element(locator)
+            return element.is_enabled() and element.is_displayed()
         except Exception:
             return False
         
@@ -176,6 +176,14 @@ class MobileActions:
         try:
             element = self.find_element(locator)
             return element.get_attribute("checked") == "true"
+        except Exception:
+            return False
+        
+    def is_element_enabled(self, locator):
+        """Checks if an element is enabled."""
+        try:
+            element = self.find_element(locator)
+            return element.is_enabled() or element.get_attribute("enabled") == "true"
         except Exception:
             return False
 
