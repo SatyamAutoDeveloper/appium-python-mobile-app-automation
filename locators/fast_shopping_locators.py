@@ -21,8 +21,8 @@ rename_shopping_list_popup_cancel_btn = (AppiumBy.XPATH, '//*[@content-desc="CAN
 rename_shopping_list_popup_rename_btn = (AppiumBy.XPATH, '//*[@content-desc="RENAME"]')
 rename_shopping_list_popup_input_field = (AppiumBy.CLASS_NAME, 'android.widget.EditText') #Groceries, Write new shopping list name here...
 current_tab_archive_list_btn = (AppiumBy.XPATH, '//*[@content-desc="Archive"]')
-current_tab = (AppiumBy.XPATH, '//*[@content-desc="CurrentTab 1 of 2"]')
-archived_tab = (AppiumBy.XPATH, '//*[@content-desc="ArchivedTab 2 of 2"]')
+current_tab = (AppiumBy.XPATH, '(//android.view.View)[2]')
+archived_tab = (AppiumBy.XPATH, '(//android.view.View)[3]')
 archived_tab_no_archived_list_msg = (AppiumBy.XPATH, '//*[@content-desc="There are no archived lists."]')
 archive_tab_unarchive_btn = (AppiumBy.XPATH, '//*[@content-desc="Unarchive"]')
 archive_tab_delete_btn = (AppiumBy.XPATH, '//*[@content-desc="Delete"]')
@@ -34,5 +34,5 @@ delete_list_confirmation_popup_delete_btn = (AppiumBy.XPATH, '//*[@content-desc=
 show_menu_btn = (AppiumBy.XPATH, '//*[@content-desc="Show menu"]')
 archive_list_btn = (AppiumBy.XPATH, '//*[@content-desc="Archive list"]')
 settings_btn = (AppiumBy.XPATH, '//*[@content-desc="Settings"]')
-multiple_shopping_lists_radio_btn = (AppiumBy.XPATH, '//*[@content-desc="Multiple shopping listsMore features, better management."]')
+multiple_shopping_lists_radio_btn = (AppiumBy.XPATH, '//*[contains(@content-desc, "Multiple shopping lists")]')
 navigate_back_btn = (AppiumBy.XPATH, '//*[@content-desc="Back"]')

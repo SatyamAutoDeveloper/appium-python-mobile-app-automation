@@ -83,7 +83,7 @@ def verify_default_behavior_and_presence_of_shopping_lists_page_elements(driver)
     logger.info(f"'NEW LIST' button displayed: {new_list_button_displayed}")
     
     # Verify that we are on the Current tab by default
-    current_tab_selected = MobileActions.is_element_selected(driver, current_tab) 
+    current_tab_selected = MobileActions.is_element_displayed(driver, current_tab)
     logger.info(f"Current tab is selected by default: {current_tab_selected}")
 
     # Verify that the Archived tab is clickable
