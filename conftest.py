@@ -47,13 +47,9 @@ def driver(request):
     options.app = str(pathlib.Path(config["app"]).absolute())
     options.app_package = config["package"]
     options.app_activity = config["activity"]
-    
-    #options.app = "apps/tourist_guide_app.apk"
-    #options.package = "com.dataflair.myapplication"
-    #options.activity = ".MainActivity"
 
     options.set_capability("appium:disableWindowAnimation", True)
-    options.set_capability("appium:adbExecTimeout", 60000)
+    options.set_capability("appium:adbExecTimeout", 90000)
 
     driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
     yield driver
