@@ -1,4 +1,4 @@
-name: Fast Shopping App Testing
+name: Fast Shopping App Testing with Parallel Execution
 permissions:
   contents: read
 
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Execute-Fast-Shopping-App-Tests:
+  Execute-Fast-Shopping-App-Parallel-Execution-Tests:
     runs-on: ubuntu-latest
     
     steps:
