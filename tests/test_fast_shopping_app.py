@@ -70,3 +70,98 @@ def test_presence_of_add_new_shopping_list_popup_elements(NativeDriver):
     assert cancel_button_displayed, "Expected 'CANCEL' button to be displayed in the 'Add new shopping list' popup."
     assert add_button_displayed, "Expected 'ADD' button to be displayed in the 'Add new shopping list' popup."
 
+
+@pytest.mark.smoke
+def test_adding_new_shopping_list(NativeDriver):
+    """Test case to verify that a new shopping list can be added successfully."""
+    navigate_to_shopping_lists_page_from_main_page(NativeDriver)
+    click_new_list_button(NativeDriver)
+    add_new_shopping_list(NativeDriver, "Groceries")
+    # Verify that the new shopping list is added and displayed in the Current tab
+    new_list_displayed = verify_new_shopping_list_added(NativeDriver, "Groceries")
+    assert new_list_displayed, "Expected 'Groceries' shopping list to be added and displayed in the Current tab."
+
+
+@pytest.mark.smoke
+def test_presence_of_shopping_list_menu_options(NativeDriver):
+    """Test case to verify the presence and state of options in the shopping list menu."""
+    navigate_to_shopping_lists_page_from_main_page(NativeDriver)
+    click_new_list_button(NativeDriver)
+    add_new_shopping_list(NativeDriver, "Groceries")
+    rename_option_displayed, archive_option_displayed = verify_presence_of_options_in_added_shopping_list_menu(NativeDriver)
+    assert rename_option_displayed, "Expected 'Rename' option to be displayed in the shopping list menu."
+    assert archive_option_displayed, "Expected 'Archive' option to be displayed in the shopping list menu."
+
+
+@pytest.mark.smoke
+def test_presence_of_rename_shopping_list_popup_elements(NativeDriver):
+    """Test case to verify the presence of key elements in the 'Rename shopping list' popup."""
+    navigate_to_shopping_lists_page_from_main_page(NativeDriver)
+    click_new_list_button(NativeDriver)
+    add_new_shopping_list(NativeDriver, "Groceries")
+    popup_title_displayed, cancel_button_displayed, rename_button_displayed, input_field_displayed = verify_presence_of_rename_shopping_list_popup_elements(NativeDriver)
+    assert popup_title_displayed, "Expected 'Rename shopping list' popup title to be displayed."
+    assert input_field_displayed, "Expected input field to be displayed in the 'Rename shopping list' popup."
+    assert cancel_button_displayed, "Expected 'CANCEL' button to be displayed in the 'Rename shopping list' popup."
+    assert rename_button_displayed, "Expected 'RENAME' button to be displayed in the 'Rename shopping list' popup."
+
+
+@pytest.mark.smoke
+def test_renaming_shopping_list(NativeDriver):
+    """Test case to verify that a shopping list can be renamed successfully."""
+    navigate_to_shopping_lists_page_from_main_page(NativeDriver)
+    click_new_list_button(NativeDriver)
+    add_new_shopping_list(NativeDriver, "Groceries")
+    rename_shopping_list(NativeDriver, "Supermarket List")
+    # Verify that the shopping list is renamed and displayed with the new name in the Current tab
+    renamed_list_displayed = verify_shopping_list_renamed(NativeDriver, "Supermarket List")
+    assert renamed_list_displayed, "Expected 'Groceries' shopping list to be renamed to 'Supermarket List' and displayed in the Current tab."
+
+
+@pytest.mark.smoke
+def test_presence_of_add_item_popup_elements(NativeDriver):
+    """Test case to verify the presence of key elements in the 'Add item' popup."""
+    navigate_to_shopping_lists_page_from_main_page(NativeDriver)
+    click_new_list_button(NativeDriver)
+    add_new_shopping_list(NativeDriver, "Groceries")
+    popup_title_displayed, cancel_button_displayed, add_button_displayed, input_field_displayed = verify_presence_of_add_item_popup_elements(NativeDriver)
+    assert popup_title_displayed, "Expected 'Add item' popup title to be displayed."
+    assert input_field_displayed, "Expected input field to be displayed in the 'Add item' popup."
+    assert cancel_button_displayed, "Expected 'CANCEL' button to be displayed in the 'Add item' popup."
+    assert add_button_displayed, "Expected 'ADD' button to be displayed in the 'Add item' popup."
+
+
+@pytest.mark.smoke
+def test_adding_new_item_to_shopping_list(NativeDriver):
+    """Test case to verify that a new item can be added to a shopping list successfully."""
+    navigate_to_shopping_lists_page_from_main_page(NativeDriver)
+    click_new_list_button(NativeDriver)
+    add_new_shopping_list(NativeDriver, "Groceries")
+    add_new_item_to_shopping_list(NativeDriver, "Bananas")
+    # Verify that the new item is added and displayed in the shopping list
+    new_item_displayed = verify_new_item_added_to_shopping_list(NativeDriver, "Bananas")
+    assert new_item_displayed, "Expected 'Bananas' item to be added and displayed in the 'Groceries' shopping list."
+
+
+@pytest.mark.smoke
+def test_archive_shopping_list(NativeDriver):
+    """Test case to verify that a shopping list is archived successfully."""
+    navigate_to_shopping_lists_page_from_main_page(NativeDriver)
+    click_new_list_button(NativeDriver)
+    add_new_shopping_list(NativeDriver, "Groceries")
+    archive_shopping_list(NativeDriver)
+    # Verify that the shopping list is archived and displayed in the Archived tab
+    archived_shopping_list_displayed = verify_shopping_list_archived(NativeDriver)
+    assert archived_shopping_list_displayed, "Expected 'Groceries' shopping list to be archived and displayed in the Archived tab."
+
+
+@pytest.mark.smoke
+def test_delete_shopping_list(NativeDriver):
+    """Test case to verify that a shopping list is deleted successfully."""
+    navigate_to_shopping_lists_page_from_main_page(NativeDriver)
+    click_new_list_button(NativeDriver)
+    add_new_shopping_list(NativeDriver, "Groceries")
+    archive_shopping_list(NativeDriver)
+    delete_archived_shopping_list(NativeDriver)
+    shopping_list_deleted = verify_shopping_list_deleted(NativeDriver)
+    assert shopping_list_deleted, "Expected 'Groceries' shopping list to be deleted and no longer displayed in the Archived tab."

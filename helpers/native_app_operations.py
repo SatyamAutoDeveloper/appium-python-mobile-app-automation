@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 class MobileActions:
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(self.driver, 30)
+        self.wait = WebDriverWait(self.driver, 60)
 
     def find_element(self, locator):
         """Finds a single element with an explicit wait."""
@@ -30,6 +30,13 @@ class MobileActions:
         logger.info(f"Attempting to click element with locator: {locator}")
         element = self.find_element(locator)
         element.click()
+
+    def move_to_element_and_click(self, locator):
+        """Moves to an element and clicks it."""
+        element = self.find_element(locator)
+        actions = ActionChains(self.driver)
+        actions.move_to_element(element).click().perform()
+        logger.info(f"Moved to element and clicked element with locator: {locator}")
 
     def tap_center(self, locator):
         logger.info(f"Performing tap on element at locator: {locator}")
@@ -140,6 +147,18 @@ class MobileActions:
             element.clear()
         element.send_keys(value)
         logger.info("Typed value into element: {} with locator: {}".format(value, locator))
+
+    def move_to_element_and_type_value(self, locator, value, clear_first=True):
+        """Moves to an element and sends keys to it."""
+        element = self.find_element(locator)
+        if clear_first:
+            element.clear()
+        actions = ActionChains(self.driver)
+        actions.move_to_element(element)
+        actions.click()
+        actions.send_keys(value)
+        actions.perform()
+        logger.info("Moved to element and typed value: {} into element with locator: {}".format(value, locator))
 
     def scroll_element_into_view(self, locator):
         """Scrolls until the element is in view using mobile UIAutomator (Android focus)."""
