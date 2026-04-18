@@ -147,5 +147,5 @@ The supported app configurations are defined in `conftest.py`:
 - Add or modify page objects and locators in `pages/` and `locators/` as the app UI changes.
 
 
-## Self-Healing Agent Documentation Used in UI Automation Framework
+## Web and Mobile APP Self-Healing Agents Differences Documentation
 Primary Differences between Selenium UI (Web) and Appium (Mobile) Self-Healing Agents: [https://github.com/SatyamAutoDeveloper/appium-python-mobile-app-automation/wiki/The-primary-difference-between-a-Selenium-UI-(Web)-and-an-Appium-(Mobile)-self%E2%80%90healing-agent]
