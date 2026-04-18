@@ -145,3 +145,7 @@ The supported app configurations are defined in `conftest.py`:
 - Ensure the Appium server URL in `conftest.py` matches your local setup (`http://127.0.0.1:4723`).
 - Update device capabilities in `conftest.py` if you need to run tests on a real device or a different emulator.
 - Add or modify page objects and locators in `pages/` and `locators/` as the app UI changes.
+
+
+## Self-Healing Agent Documentation Used in UI Automation Framework
+Primary Differences between Selenium UI (Web) and Appium (Mobile) Self-Healing Agents: [https://github.com/SatyamAutoDeveloper/appium-python-mobile-app-automation/wiki/The-primary-difference-between-a-Selenium-UI-(Web)-and-an-Appium-(Mobile)-self%E2%80%90healing-agent]
