@@ -36,24 +36,7 @@ class MobileActions:
         element = self.find_element(locator)
         actions = ActionChains(self.driver)
         actions.move_to_element(element).click().perform()
-        logger.info(f"Moved to element and clicked element with locator: {locator}")
-
-    def tap_center(self, locator):
-        logger.info(f"Performing tap on element at locator: {locator}")
-        element = self.find_element(locator)
-        location = element.location
-        size = element.size
-        # Calculate the dead center of the element
-        x = location['x'] + (size['width'] / 2)
-        y = location['y'] + (size['height'] / 2)
-
-        actions = ActionBuilder(self.driver, mouse=PointerInput(interaction.POINTER_TOUCH, "touch"))
-        actions.pointer_action.move_to_location(x, y)
-        actions.pointer_action.pointer_down()
-        actions.pointer_action.pause(0.1) # Small pause to simulate a real finger press
-        actions.pointer_action.pointer_up()
-        actions.perform()
-        
+        logger.info(f"Moved to element and clicked element with locator: {locator}")   
 
     def click_with_retry(self, locator, target_locator, retries=3):
         """Attempts to click an element with retries in case of transient issues."""
@@ -70,29 +53,6 @@ class MobileActions:
                 logger.warning(f"Click attempt {attempt + 1} failed for {locator}: {e}")
                 if attempt == retries - 1:
                     raise
-
-    def tap_center_with_retry(self, locator, retries=3):
-        """Attempts to tap the center of an element with retries in case of transient issues."""
-        logger.info(f"Attempting to tap center of element with locator: {locator} with up to {retries} retries")
-        for attempt in range(retries):
-            try:
-                self.tap_center(locator)
-                logger.info(f"Successfully Taped element on attempt {attempt + 1}")
-                return
-            except Exception as e:
-                logger.warning(f"Tap attempt {attempt + 1} failed for {locator}: {e}")
-                if attempt == retries - 1:
-                    raise
-
-    def click_with_replace_value(self, *locator, value):
-        """Replaces a placeholder in the locator with a value and clicks the element."""
-        if isinstance(*locator, tuple):
-            by, loc = locator
-            loc = loc.replace("{value}", value)
-            new_locator = (by, loc)
-            self.click_on_element(new_locator)
-        else:
-            raise ValueError("Locator must be a tuple of (By, locator_string)")
 
     def get_element_text(self, locator):
         """Gets the text of an element."""
